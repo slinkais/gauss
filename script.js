@@ -8,10 +8,15 @@ $(function() {
         var aprekins = document.getElementById('x' + (i + 1) + (j + 1));
         aprekins.addEventListener('input', function()
         {
+            nolasitInput();
             console.log('input changed to: ', this.value);
-            if(this.value != '') {
-                aprekinat();
+            for (var k = 0; k < matrica.length; k++) {
+                console.log(matrica[k]);
+                if(matrica[k] === '') {
+                  return;
+                }
             }
+            aprekinat();
         });
         matrica.push(aprekins.value);
       }
@@ -20,7 +25,6 @@ $(function() {
 });
 
 function aprekinat() {
-  nolasitInput();
   $('#aprekins *').empty();
   $('#aprekins').append('<p>Ievadītā matrica:</p>');
   $('#aprekins').append(matricaTabula());
