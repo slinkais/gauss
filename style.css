@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+  background-color: rgb(170, 123, 102);
+}
+
+.header {
+  background-color: rgb(11, 5, 208);
+  text-align: center;
+}
+
+.numberinput {
+  margin: 16px;
+  text-align: center;
+  background-color: rgb(110, 196, 187);
+}
+
+.xinput {
+  margin: 8px;
+  width: 50px;
+}
+
+.aprekins {
+  margin: 8px;
+  background-color: rgb(154, 223, 224);
+  text-align: center;
+}
+
+.atbilde {
+  margin: 8px;
+  background-color: rgb(79, 132, 179);
+  text-align: center;
+}
+
+th, td {
+    padding: 15px;
+}
+
+table {
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
+}
