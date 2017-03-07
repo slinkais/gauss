@@ -22,7 +22,7 @@ table {
 
 .header {
   margin: 16px;
-  background-color: rgb(34, 237, 49);
+  background-color: rgb(0, 162, 12);
   text-align: center;
 }
 
@@ -38,6 +38,12 @@ table {
 }
 
 .aprekins {
+  margin: 16px;
+  background-color: rgb(30, 185, 40);
+  text-align: center;
+}
+
+.parbaude {
   margin: 16px;
   background-color: rgb(30, 185, 40);
   text-align: center;

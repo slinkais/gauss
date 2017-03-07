@@ -25,6 +25,7 @@ $(function() {
 });
 
 function aprekinat() {
+  var parbaudesMatrica = matrica.slice();
   $('#aprekins *').empty();
   $('#aprekins').append('<h2>Aprēķins</h2>');
   $('#aprekins').append('<p>Ievadītā matrica:</p>');
@@ -61,6 +62,7 @@ function aprekinat() {
   if(matrica[10] === 0 && matrica[11] !== 0) {
     $('#aprekins').append('<p>0Z = ' + matrica[11] + '</p>');
     $('#aprekins').append('<p>Nav atrisinājuma!</p>');
+    $('#parbaude *').empty();
     $('#atbilde *').empty();
     $('#atbilde').append('<h2>Atbilde</h2>');
     $('#atbilde').append('<h3>Sistēmai nav atrisinājuma</h3>');
@@ -74,6 +76,7 @@ function aprekinat() {
     $('#aprekins').append('<p>Y = ' + y + '</p>');
     x = round(matrica[3] - (matrica[1] * matrica[7]),4) + ' - (' + round(matrica[1] * matrica[7],4 - matrica[2],4) + 'C)';
     $('#aprekins').append('<p>X = ' + x + '</p>');
+    $('#parbaude *').empty();
     $('#atbilde *').empty();
     $('#atbilde').append('<h2>Atbilde</h2>');
     $('#atbilde').append('<h3>('+ round(x,4) + ', ' + round(y,4) + ', C)</h3>');
@@ -89,6 +92,43 @@ function aprekinat() {
     $('#aprekins').append('<p>Y = ' + round(matrica[7],4) + ' - ' + round(temp,4) + ' = ' + round(y,4) + '</p>');
     x = matrica[3] - (matrica[1] * y) - (matrica[2] * z);
     $('#aprekins').append('<p>X = ' + round(matrica[3],4) + ' - (' + round((matrica[1] * y),4) + ') - (' + round((matrica[2] * z),4) + ') = ' + round(x,4) + '</p>');
+    var temp = matrica.slice();
+    matrica = parbaudesMatrica.slice();
+    $('#parbaude *').empty();
+    $('#parbaude').append('<h2>Pārbaude</h2>');
+    for (var i = 0; i < 12; i++) {
+      if(i === 0 || i === 4 || i === 8) {
+        matrica[i] = matrica[i] + ' * ' + round(x,4);
+      }
+      if(i === 1 || i === 5 || i === 9) {
+        matrica[i] = matrica[i] + ' * ' + round(y,4);
+      }
+      if(i === 2 || i === 6 || i === 10) {
+        matrica[i] = matrica[i] + ' * ' + round(z,4);
+      }
+    }
+    $('#parbaude').append(matricaTabula());
+
+    matrica[0] = parbaudesMatrica[0] * x;
+    matrica[1] = parbaudesMatrica[1] * y;
+    matrica[2] = parbaudesMatrica[2] * z;
+    matrica[4] = parbaudesMatrica[4] * x;
+    matrica[5] = parbaudesMatrica[5] * y;
+    matrica[6] = parbaudesMatrica[6] * z;
+    matrica[8] = parbaudesMatrica[8] * x;
+    matrica[9] = parbaudesMatrica[9] * y;
+    matrica[10] = parbaudesMatrica[10] * z;
+    $('#parbaude').append(matricaTabula());
+    matrica[2] = matrica[0] + matrica[1] + matrica[2];
+    matrica[6] = matrica[4] + matrica[5] + matrica[6];
+    matrica[10] = matrica[8] + matrica[9] + matrica[10];
+    matrica[0] = '';
+    matrica[1] = '';
+    matrica[4] = '';
+    matrica[5] = '';
+    matrica[8] = '';
+    matrica[9] = '';
+    $('#parbaude').append(matricaTabula());
     $('#atbilde *').empty();
     $('#atbilde').append('<h2>Atbilde</h2>');
     $('#atbilde').append('<h3>('+ round(x,4) + ', ' + round(y,4) + ', ' + round(z,4) + ')</h3>');
@@ -101,7 +141,11 @@ function matricaTabula() {
     atbilde += '<tr>';
     for (var j = 0; j < 4; j++) {
       var index = i * 4 + j;
+      if(j === 3) {
+        atbilde += '<td><strong>' + round(matrica[index],4) + '</strong></td>';
+      } else {
       atbilde += '<td>' + round(matrica[index],4) + '</td>';
+    }
     }
     atbilde += '</tr>';
   }
@@ -121,7 +165,7 @@ function nolasitInput() {
 }
 
 function round(value, decimals) {
-  if(isNaN(value)) {
+  if(isNaN(value) || value === '') {
     return value;
   }
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
